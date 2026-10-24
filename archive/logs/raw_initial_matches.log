@@ -1,0 +1,22 @@
+Connecting to server
+....Connected!
+Connecting to server
+....Connected!
+The connection was closed by the server. Bye, bye!
+Game over! You won!
+Connecting to server
+....Connected!
+[31mTick 43: Action Failure: attack: invalid or non-existing target ({"type":"attack","unit_id":132,"target_id":30})[0m
+[31mTick 140: Action Failure: move: invalid target position. should be empty ({"type":"move","unit_id":134,"x":12,"y":10})[0m
+[31mTick 164: Action Failure: move: invalid target position. should be empty ({"type":"move","unit_id":132,"x":1,"y":0})[0m
+[31mTick 285: Action Failure: move: invalid target position. should be empty ({"type":"move","unit_id":134,"x":12,"y":11})[0m
+The connection was closed by the server. Bye, bye!
+Game over! You won!
+Connecting to server
+....Connected!
+Strategy policy: 748526e4bddd401d46ddebb198f32d92270ef74ece627cc574bf8a2e2449e111
+[31mTick 112: Action Failure: move: invalid target position. should be empty ({"type":"move","unit_id":156,"x":12,"y":11})[0m
+[31mTick 114: Action Failure: move: invalid target position. should be empty ({"type":"move","unit_id":130,"x":13,"y":10})[0m
+[31mTick 128: Action Failure: move: invalid target position. should be empty ({"type":"move","unit_id":156,"x":10,"y":11})[0m
+[31mTick 142: Action Failure: move: invalid target position. should be empty ({"type":"move","unit_id":180,"x":16,"y":17})[0m
+Game over! You lost!

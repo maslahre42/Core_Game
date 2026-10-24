@@ -4,7 +4,7 @@
 		"dockerfile": "Dockerfile"
 	},
 	"forwardPorts": [
-		4242
+		4241
 	],
 	"workspaceFolder": "/workspaces/monorepo",
 	"customizations": {

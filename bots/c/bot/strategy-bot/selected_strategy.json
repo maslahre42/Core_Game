@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "params": {
+    "miners": 1,
+    "guards": 1,
+    "attacker": 1,
+    "return_load": 35,
+    "economy_until": 200,
+    "threat_radius": 8,
+    "pile_bonus": 12,
+    "home_weight": 2
+  }
+}

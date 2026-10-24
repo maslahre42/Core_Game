@@ -111,7 +111,9 @@ int main(int argc, char *argv[])
 	Logger::Log(teamIdsStr);
 
 	// will throw a runtime error if something fails
-	Server server{};
+	const char *env_port = std::getenv("SERVER_PORT");
+	int port = (env_port && *env_port) ? std::stoi(env_port) : 4444;
+	Server server{port};
 
 	std::unordered_map<unsigned int, std::unique_ptr<Bridge>> bridges{};
 

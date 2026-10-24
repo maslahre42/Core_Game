@@ -78,6 +78,6 @@ target_include_directories(server PRIVATE
 	"${CMAKE_BINARY_DIR}/xxhash/include"
 )
 
-target_compile_options(server PRIVATE -Wall -Wextra -Werror)
+target_compile_options(server PRIVATE -Wall -Wextra -Werror -Wno-inconsistent-missing-override)
 
 target_link_libraries(server PRIVATE nlohmann_json nlohmann_json_schema_validator xxhash)

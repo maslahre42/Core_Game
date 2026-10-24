@@ -1,3 +1,19 @@
 replay_latest.json
 .DS_Store
 .idea
+
+# Build artifacts and binaries
+*.o
+*.d
+*.a
+build/
+obj/
+server/server
+server/build/
+bots/**/build/
+bots/**/obj/
+bots/c/bot/my-core-bot/bot
+bots/c/bot/gridmaster/gridmaster
+bots/c/bot/strategy-bot/strategy-bot
+bots/c/bot/strategy-bot/bot
+*.zip

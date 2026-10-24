@@ -3,9 +3,10 @@ OBJDIR = build
 SRCS = $(wildcard $(SRCDIR)/*.c)
 OBJS = $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -lm -g -fsanitize=address
-CLIENT_LIB_DIR ?= /core
+CC ?= cc
+CFLAGS ?= -Wall -Wextra -Werror -g -fsanitize=address
+LDFLAGS ?= -lm
+CLIENT_LIB_DIR ?= $(if $(wildcard /core/inc/core_lib.h),/core,$(if $(wildcard ../../client_lib/inc/core_lib.h),../../client_lib,/core))
 INC = -I inc -I $(CLIENT_LIB_DIR)/inc
 EXEC = bot
 
@@ -15,7 +16,7 @@ run: all
 	./$(EXEC)
 
 $(EXEC): $(OBJS) $(CLIENT_LIB_DIR)/core_lib.a
-	$(CC) $(CFLAGS) $(OBJS) $(CLIENT_LIB_DIR)/core_lib.a -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(CLIENT_LIB_DIR)/core_lib.a $(LDFLAGS) -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)

@@ -1,0 +1,187 @@
+{
+	"gridSize": 20,
+	"seed": "",
+	"idleIncome": 3,
+	"idleIncomeTimeOut": 100,
+	"maxUnitStandingCooldown": 50,
+	"depositHp": 50,
+	"depositIncome": 100,
+	"gemPileIncome": 35,
+	"coreHp": 99,
+	"initialGems": 300,
+	"wallHp": 77,
+	"worldGenerator": "sparse",
+	"worldGeneratorConfig": {
+		"depositCount": 20,
+		"gemPileCount": 10,
+		"wallCount": 30,
+		"coreBuffer": 3
+	},
+	"components": {
+		"maxComponentsPerUnit": 5,
+		"unitDefaultCost": 20,
+		"unitDefaultProperties": {
+			"hp": 5,
+			"baseActionCooldown": 3,
+			"gemsPerCooldownStep": 10,
+			"maxGems": 100,
+			"damageReductionPercent": 0, 
+			"damageCore": 0,
+			"damageUnit": 0,
+			"damageObject": 0,
+			"postSpawnCoreCooldown": 10
+		},
+		"components": [
+			{
+				"id": "health",
+				"properties": [
+					{
+						"name": "hp",
+						"modification": 3
+					}
+				],
+				"cost": 12,
+				"visualizer_asset_prioritized": false,
+				"visualizer_asset_path": "heart"
+			},
+			{
+				"id": "speed",
+				"properties": [
+					{
+						"name": "baseActionCooldown",
+						"modification": -2
+					}
+				],
+				"cost": 12,
+				"visualizer_asset_prioritized": false,
+				"visualizer_asset_path": "lightning"
+			},
+			{
+				"id": "armor",
+				"properties": [
+					{
+						"name": "damageReductionPercent",
+						"modification": 20
+					}
+				],
+				"cost": 30,
+				"visualizer_asset_prioritized": true,
+				"visualizer_asset_path": "shield"
+			},
+			{
+				"id": "unit_attack",
+				"properties": [
+					{
+						"name": "damageUnit",
+						"modification": 3
+					}
+				],
+				"cost": 15,
+				"visualizer_asset_prioritized": true,
+				"visualizer_asset_path": "sword"
+			},
+			{
+				"id": "core_attack",
+				"properties": [
+					{
+						"name": "damageCore",
+						"modification": 3
+					}
+				],
+				"cost": 15,
+				"visualizer_asset_prioritized": true,
+				"visualizer_asset_path": "axe"
+			},
+			{
+				"id": "mining",
+				"properties": [
+					{
+						"name": "damageObject",
+						"modification": 3
+					}
+				],
+				"cost": 15,
+				"visualizer_asset_prioritized": true,
+				"visualizer_asset_path": "pickaxe"
+			},
+			{
+				"id": "gem_carrying_efficiency",
+				"properties": [
+					{
+						"name": "gemsPerCooldownStep",
+						"modification": 10
+					}
+				],
+				"cost": 20,
+				"visualizer_asset_prioritized": false,
+				"visualizer_asset_path": "feather"
+			},
+			{
+				"id": "gem_carrying_capacity",
+				"properties": [
+					{
+						"name": "maxGems",
+						"modification": 50
+					}
+				],
+				"cost": 20,
+				"visualizer_asset_prioritized": false,
+				"visualizer_asset_path": "bag"
+			}
+		],
+		"invalidConditions": [
+			{
+				"message": "Your action cooldown may not be less than your total attacks added together",
+				"condition": {
+					"type": "less_than",
+					"1": {
+						"type": "property",
+						"property": "baseActionCooldown"
+					},
+					"2": {
+						"type": "sum",
+						"1": {
+							"type": "sum",
+							"1": {
+								"type": "property",
+								"property": "damageUnit"
+							},
+							"2": {
+								"type": "property",
+								"property": "damageCore"
+							}
+						},
+						"2": {
+							"type": "property",
+							"property": "damageObject"
+						}
+					}
+				}
+			},
+			{
+				"message": "You may not have more than 4 armor components",
+				"condition": {
+					"type": "greater_than",
+					"1": {
+						"type": "component_count",
+						"component": "armor"
+					},
+					"2": {
+						"type": "const",
+						"value": 4
+					}
+				}
+			}
+		]
+	},
+	"corePositions": [
+		{
+			"x": 0,
+			"y": 0
+		},
+		{
+			"x": 19,
+			"y": 19
+		}
+	]
+}

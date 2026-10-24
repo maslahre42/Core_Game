@@ -4,7 +4,7 @@ MAKEFLAGS += -j$(JOBS)
 LIBRARY = core_lib.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -MMD -MP
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -fPIC -MMD -MP
 
 INC = inc
 OBJDIR = obj

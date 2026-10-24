@@ -1,0 +1,3747 @@
+{
+  "date": "2026-10-24",
+  "method": "Bounded evolutionary parameter search",
+  "matches": 72,
+  "elapsed_seconds": 226.34199999999998,
+  "selected_snapshot": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+  "selected_model": {
+    "version": 1,
+    "params": {
+      "miners": 1,
+      "guards": 1,
+      "attacker": 1,
+      "return_load": 35,
+      "economy_until": 200,
+      "threat_radius": 8,
+      "pile_bonus": 12,
+      "home_weight": 2
+    }
+  },
+  "embedded_model_sha256": "748526e4bddd401d46ddebb198f32d92270ef74ece627cc574bf8a2e2449e111",
+  "exported_binary_sha256": "e7845b95fbddba4db0aa42589fc3ab6d605ca8a4ccf423be72696f7d322cd575",
+  "promotions": 0,
+  "stages": {
+    "iteration-0-train-incumbent": {
+      "matches": 12,
+      "score": 0.8333333333333334,
+      "wins": 10,
+      "losses": 2,
+      "combat_wins": 10,
+      "combat_losses": 2,
+      "game_limit_tiebreaks": 0,
+      "random_tiebreaks": 0,
+      "failures": 0,
+      "per_opponent": {
+        "baseline": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 5,
+            "Healthy": 44,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 4,
+            "Other": 0
+          }
+        },
+        "gridmaster": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 7,
+            "Healthy": 44,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 4,
+            "Other": 0
+          }
+        },
+        "initial-strategy": {
+          "matches": 4,
+          "score": 0.5,
+          "wins": 2,
+          "losses": 2,
+          "combat_wins": 2,
+          "combat_losses": 2,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 7,
+            "Healthy": 42,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 6,
+            "Other": 0
+          }
+        }
+      }
+    },
+    "iteration-0-train-candidate": {
+      "matches": 12,
+      "score": 0.9583333333333334,
+      "wins": 12,
+      "losses": 0,
+      "combat_wins": 10,
+      "combat_losses": 0,
+      "game_limit_tiebreaks": 2,
+      "random_tiebreaks": 0,
+      "failures": 0,
+      "per_opponent": {
+        "baseline": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 7,
+            "Healthy": 0,
+            "Armored": 28,
+            "Miner": 4,
+            "Guard": 8,
+            "Other": 0
+          }
+        },
+        "gridmaster": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 6,
+            "Healthy": 0,
+            "Armored": 28,
+            "Miner": 4,
+            "Guard": 8,
+            "Other": 0
+          }
+        },
+        "initial-strategy": {
+          "matches": 4,
+          "score": 0.875,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 2,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 2,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 8,
+            "Healthy": 0,
+            "Armored": 28,
+            "Miner": 4,
+            "Guard": 11,
+            "Other": 0
+          }
+        }
+      }
+    },
+    "iteration-0-promotion-incumbent": {
+      "matches": 12,
+      "score": 0.8333333333333334,
+      "wins": 10,
+      "losses": 2,
+      "combat_wins": 10,
+      "combat_losses": 2,
+      "game_limit_tiebreaks": 0,
+      "random_tiebreaks": 0,
+      "failures": 0,
+      "per_opponent": {
+        "baseline": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 2,
+            "Healthy": 47,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 4,
+            "Other": 0
+          }
+        },
+        "gridmaster": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 2,
+            "Healthy": 47,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 4,
+            "Other": 0
+          }
+        },
+        "initial-strategy": {
+          "matches": 4,
+          "score": 0.5,
+          "wins": 2,
+          "losses": 2,
+          "combat_wins": 2,
+          "combat_losses": 2,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 0,
+            "Healthy": 46,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 6,
+            "Other": 0
+          }
+        }
+      }
+    },
+    "iteration-0-promotion-candidate": {
+      "matches": 12,
+      "score": 0.8958333333333334,
+      "wins": 11,
+      "losses": 1,
+      "combat_wins": 10,
+      "combat_losses": 1,
+      "game_limit_tiebreaks": 1,
+      "random_tiebreaks": 0,
+      "failures": 0,
+      "per_opponent": {
+        "baseline": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 8,
+            "Healthy": 0,
+            "Armored": 28,
+            "Miner": 4,
+            "Guard": 8,
+            "Other": 0
+          }
+        },
+        "gridmaster": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 8,
+            "Healthy": 0,
+            "Armored": 28,
+            "Miner": 4,
+            "Guard": 8,
+            "Other": 0
+          }
+        },
+        "initial-strategy": {
+          "matches": 4,
+          "score": 0.6875,
+          "wins": 3,
+          "losses": 1,
+          "combat_wins": 2,
+          "combat_losses": 1,
+          "game_limit_tiebreaks": 1,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 8,
+            "Healthy": 0,
+            "Armored": 28,
+            "Miner": 4,
+            "Guard": 10,
+            "Other": 0
+          }
+        }
+      }
+    },
+    "final-test-initial": {
+      "matches": 12,
+      "score": 0.8333333333333334,
+      "wins": 10,
+      "losses": 2,
+      "combat_wins": 10,
+      "combat_losses": 2,
+      "game_limit_tiebreaks": 0,
+      "random_tiebreaks": 0,
+      "failures": 0,
+      "per_opponent": {
+        "baseline": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 6,
+            "Healthy": 44,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 4,
+            "Other": 0
+          }
+        },
+        "gridmaster": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 6,
+            "Healthy": 44,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 4,
+            "Other": 0
+          }
+        },
+        "initial-strategy": {
+          "matches": 4,
+          "score": 0.5,
+          "wins": 2,
+          "losses": 2,
+          "combat_wins": 2,
+          "combat_losses": 2,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 2,
+            "Healthy": 45,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 6,
+            "Other": 0
+          }
+        }
+      }
+    },
+    "final-test-selected": {
+      "matches": 12,
+      "score": 0.8333333333333334,
+      "wins": 10,
+      "losses": 2,
+      "combat_wins": 10,
+      "combat_losses": 2,
+      "game_limit_tiebreaks": 0,
+      "random_tiebreaks": 0,
+      "failures": 0,
+      "per_opponent": {
+        "baseline": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 6,
+            "Healthy": 44,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 4,
+            "Other": 0
+          }
+        },
+        "gridmaster": {
+          "matches": 4,
+          "score": 1,
+          "wins": 4,
+          "losses": 0,
+          "combat_wins": 4,
+          "combat_losses": 0,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 6,
+            "Healthy": 44,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 4,
+            "Other": 0
+          }
+        },
+        "initial-strategy": {
+          "matches": 4,
+          "score": 0.5,
+          "wins": 2,
+          "losses": 2,
+          "combat_wins": 2,
+          "combat_losses": 2,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "successful_spawns": {
+            "Light": 2,
+            "Healthy": 45,
+            "Armored": 0,
+            "Miner": 4,
+            "Guard": 6,
+            "Other": 0
+          }
+        }
+      }
+    }
+  },
+  "decisions": [
+    {
+      "iteration": 0,
+      "incumbent": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "candidate": "29c19372421388d99210f7ee61f173e960bebbf8a26d4f42c00fa48797b0af1d",
+      "opponents": [
+        "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a",
+        "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225",
+        "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163"
+      ],
+      "training_delta": 0.125,
+      "promoted": false,
+      "promotion": {
+        "accepted": false,
+        "delta": 0.0625,
+        "paired_gains": 1,
+        "paired_regressions": 1,
+        "approximate_paired_standard_error": 0.08771618315840463,
+        "incumbent": {
+          "matches": 12,
+          "score": 0.8333333333333334,
+          "wins": 10,
+          "losses": 2,
+          "combat_wins": 10,
+          "combat_losses": 2,
+          "game_limit_tiebreaks": 0,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "per_opponent": {
+            "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a": {
+              "matches": 4,
+              "score": 1,
+              "wins": 4,
+              "combat_wins": 4
+            },
+            "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225": {
+              "matches": 4,
+              "score": 1,
+              "wins": 4,
+              "combat_wins": 4
+            },
+            "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163": {
+              "matches": 4,
+              "score": 0.5,
+              "wins": 2,
+              "combat_wins": 2
+            }
+          }
+        },
+        "candidate": {
+          "matches": 12,
+          "score": 0.8958333333333334,
+          "wins": 11,
+          "losses": 1,
+          "combat_wins": 10,
+          "combat_losses": 1,
+          "game_limit_tiebreaks": 1,
+          "random_tiebreaks": 0,
+          "failures": 0,
+          "per_opponent": {
+            "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a": {
+              "matches": 4,
+              "score": 1,
+              "wins": 4,
+              "combat_wins": 4
+            },
+            "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225": {
+              "matches": 4,
+              "score": 1,
+              "wins": 4,
+              "combat_wins": 4
+            },
+            "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163": {
+              "matches": 4,
+              "score": 0.6875,
+              "wins": 3,
+              "combat_wins": 2
+            }
+          }
+        },
+        "rule": "At least two opponents and two seeds, delta >= 0.05, >= 2 paired gains, zero paired or per-opponent regressions."
+      }
+    }
+  ],
+  "activity": [
+    {
+      "opponent": "baseline",
+      "seed": "sp-test-001",
+      "a_team_id": 42,
+      "gems_delivered_to_core": 70,
+      "transfers": 2,
+      "unit_attacks": 17,
+      "deposit_attacks": 0,
+      "pile_attacks": 5
+    },
+    {
+      "opponent": "baseline",
+      "seed": "sp-test-001",
+      "a_team_id": 418,
+      "gems_delivered_to_core": 70,
+      "transfers": 2,
+      "unit_attacks": 15,
+      "deposit_attacks": 0,
+      "pile_attacks": 4
+    },
+    {
+      "opponent": "baseline",
+      "seed": "sp-test-002",
+      "a_team_id": 42,
+      "gems_delivered_to_core": 35,
+      "transfers": 1,
+      "unit_attacks": 14,
+      "deposit_attacks": 0,
+      "pile_attacks": 3
+    },
+    {
+      "opponent": "baseline",
+      "seed": "sp-test-002",
+      "a_team_id": 418,
+      "gems_delivered_to_core": 35,
+      "transfers": 1,
+      "unit_attacks": 17,
+      "deposit_attacks": 0,
+      "pile_attacks": 2
+    },
+    {
+      "opponent": "gridmaster",
+      "seed": "sp-test-001",
+      "a_team_id": 42,
+      "gems_delivered_to_core": 70,
+      "transfers": 2,
+      "unit_attacks": 16,
+      "deposit_attacks": 0,
+      "pile_attacks": 2
+    },
+    {
+      "opponent": "gridmaster",
+      "seed": "sp-test-001",
+      "a_team_id": 418,
+      "gems_delivered_to_core": 70,
+      "transfers": 2,
+      "unit_attacks": 14,
+      "deposit_attacks": 0,
+      "pile_attacks": 4
+    },
+    {
+      "opponent": "gridmaster",
+      "seed": "sp-test-002",
+      "a_team_id": 42,
+      "gems_delivered_to_core": 35,
+      "transfers": 1,
+      "unit_attacks": 18,
+      "deposit_attacks": 0,
+      "pile_attacks": 2
+    },
+    {
+      "opponent": "gridmaster",
+      "seed": "sp-test-002",
+      "a_team_id": 418,
+      "gems_delivered_to_core": 35,
+      "transfers": 1,
+      "unit_attacks": 19,
+      "deposit_attacks": 0,
+      "pile_attacks": 2
+    },
+    {
+      "opponent": "strategy",
+      "seed": "sp-test-001",
+      "a_team_id": 42,
+      "gems_delivered_to_core": 105,
+      "transfers": 3,
+      "unit_attacks": 33,
+      "deposit_attacks": 0,
+      "pile_attacks": 6
+    },
+    {
+      "opponent": "strategy",
+      "seed": "sp-test-001",
+      "a_team_id": 418,
+      "gems_delivered_to_core": 70,
+      "transfers": 2,
+      "unit_attacks": 27,
+      "deposit_attacks": 0,
+      "pile_attacks": 4
+    },
+    {
+      "opponent": "strategy",
+      "seed": "sp-test-002",
+      "a_team_id": 42,
+      "gems_delivered_to_core": 35,
+      "transfers": 1,
+      "unit_attacks": 18,
+      "deposit_attacks": 0,
+      "pile_attacks": 2
+    },
+    {
+      "opponent": "strategy",
+      "seed": "sp-test-002",
+      "a_team_id": 418,
+      "gems_delivered_to_core": 35,
+      "transfers": 1,
+      "unit_attacks": 19,
+      "deposit_attacks": 0,
+      "pile_attacks": 3
+    }
+  ],
+  "executed_identity": {
+    "strategy": "a017265eec31847da07f66b4f6fb4813fd79c2f707c0a7d4ba5d1fd998feff6f",
+    "baseline": "2750f44359f7ec175c4318cd817ea73c805d6a60e2ee45bf49ad0e4c2fb3fd0d",
+    "gridmaster": "dd1bfbb4dbc145f08a3a010173e3ddefe18c912226a19b60848555d24986f592",
+    "tools": "4b1f2e6767732da8d18b784ba5552603be09f53234c7031adf264d9f889a079f",
+    "game": "5a68e07dab6235844537b9ef0abdbe764561196646b3e8f892235fd6fedbfc1c",
+    "server_config": "9f336d3870828bfcd6b2e8ad095271e0001f97e7d5482e802468f3ead2ef70e1",
+    "engine": "2f6d676e7d9c8800309df7b4982074c99cb773c39a342e15221dfdf7d352d9ba",
+    "client": "3639314b3bd52f10c332517fcfe2c5d1c6c7266fbf482b533953476cde14ecd0"
+  },
+  "snapshots": {
+    "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a": {
+      "kind": "baseline",
+      "model": {
+        "version": 1,
+        "features": [
+          "bias",
+          "bank",
+          "own_units",
+          "enemy_units",
+          "own_core_hp",
+          "enemy_core_hp",
+          "enemy_threat",
+          "ticks"
+        ],
+        "actions": [
+          "light",
+          "healthy",
+          "armored",
+          "wait"
+        ],
+        "weights": [
+          [
+            0.4,
+            -0.1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            -0.4,
+            0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            -0.8,
+            -0.5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "costs": [
+          35,
+          47,
+          65,
+          0
+        ]
+      },
+      "source_sha256": "2750f44359f7ec175c4318cd817ea73c805d6a60e2ee45bf49ad0e4c2fb3fd0d",
+      "binary_sha256": "e6f4d13d882df770b866896d0d0ce3dec7397711ec9d7c030191def721382c8b"
+    },
+    "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225": {
+      "kind": "gridmaster",
+      "model": {
+        "reference": "Gridmaster"
+      },
+      "source_sha256": "dd1bfbb4dbc145f08a3a010173e3ddefe18c912226a19b60848555d24986f592",
+      "binary_sha256": "0e7e5bd94512330970b571434bc737ca66627d47cc8b05e1530524b0cf57cd81"
+    },
+    "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163": {
+      "kind": "strategy",
+      "model": {
+        "version": 1,
+        "params": {
+          "miners": 1,
+          "guards": 1,
+          "attacker": 1,
+          "return_load": 35,
+          "economy_until": 200,
+          "threat_radius": 8,
+          "pile_bonus": 12,
+          "home_weight": 2
+        }
+      },
+      "source_sha256": "6a3ec248efada53e754ddcdd0181be2cb8e88c4afb684ff65db6f415fee04c90",
+      "binary_sha256": "2cd0b7c88a25da67b505a4a3071da6c6189cfec96bf1693e5071424aaea89eff"
+    },
+    "29c19372421388d99210f7ee61f173e960bebbf8a26d4f42c00fa48797b0af1d": {
+      "kind": "strategy",
+      "model": {
+        "version": 1,
+        "params": {
+          "miners": 1,
+          "guards": 2,
+          "attacker": 2,
+          "return_load": 35,
+          "economy_until": 200,
+          "threat_radius": 8,
+          "pile_bonus": 12,
+          "home_weight": 2
+        }
+      },
+      "source_sha256": "40742e610fba90ad1e95026d1f68e8441c3cbf357263146ad4ae065606a9d21b",
+      "binary_sha256": "c89bad490a33cff4a8e27641281739accdde987c66c793b71d76c5dad02edfcd"
+    }
+  },
+  "matches_by_panel": [
+    {
+      "label": "iteration-0-train-incumbent",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a",
+      "evaluation": "logs/evaluation-2hNW6k",
+      "rows": [
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 186,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 198,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 187,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-train-incumbent",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225",
+      "evaluation": "logs/evaluation-7lv1Gw",
+      "rows": [
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 190,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 198,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 187,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-train-incumbent",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "evaluation": "logs/evaluation-EnrG8S",
+      "rows": [
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 202,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "loss",
+          "decision": "combat",
+          "final_tick": 202,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 2,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 244,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 2,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "loss",
+          "decision": "combat",
+          "final_tick": 244,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-train-candidate",
+      "subject": "29c19372421388d99210f7ee61f173e960bebbf8a26d4f42c00fa48797b0af1d",
+      "opponent": "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a",
+      "evaluation": "logs/evaluation-dlCofG",
+      "rows": [
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 194,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 203,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 197,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 202,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-train-candidate",
+      "subject": "29c19372421388d99210f7ee61f173e960bebbf8a26d4f42c00fa48797b0af1d",
+      "opponent": "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225",
+      "evaluation": "logs/evaluation-z9Y89O",
+      "rows": [
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 194,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 196,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 194,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 197,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-train-candidate",
+      "subject": "29c19372421388d99210f7ee61f173e960bebbf8a26d4f42c00fa48797b0af1d",
+      "opponent": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "evaluation": "logs/evaluation-RCcbJ2",
+      "rows": [
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 244,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 3,
+              "Other": 0
+            },
+            "b": {
+              "Light": 1,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "timeout_tiebreak",
+          "final_tick": 500,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "7742ba5f48be704dadac47c58d52eddedecdf02d67a553ec459324e6062e27f4",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 4,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "timeout_tiebreak",
+          "final_tick": 500,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 3,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 3,
+              "Other": 0
+            },
+            "b": {
+              "Light": 5,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-train-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 425,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "30a3ebb4c8dbb43bbc56c979fb1f3affe11eca0ee3fba431fba9d467165f8527",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 3,
+              "Other": 0
+            },
+            "b": {
+              "Light": 3,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-promotion-incumbent",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a",
+      "evaluation": "logs/evaluation-1GwjwF",
+      "rows": [
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 201,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-promotion-incumbent",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225",
+      "evaluation": "logs/evaluation-23zLGA",
+      "rows": [
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 187,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-promotion-incumbent",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "evaluation": "logs/evaluation-gAsAf3",
+      "rows": [
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 205,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "loss",
+          "decision": "combat",
+          "final_tick": 205,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 231,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "loss",
+          "decision": "combat",
+          "final_tick": 231,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-promotion-candidate",
+      "subject": "29c19372421388d99210f7ee61f173e960bebbf8a26d4f42c00fa48797b0af1d",
+      "opponent": "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a",
+      "evaluation": "logs/evaluation-JIBiSk",
+      "rows": [
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 197,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 199,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 194,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 194,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-promotion-candidate",
+      "subject": "29c19372421388d99210f7ee61f173e960bebbf8a26d4f42c00fa48797b0af1d",
+      "opponent": "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225",
+      "evaluation": "logs/evaluation-49f7Tl",
+      "rows": [
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 194,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 199,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 194,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 194,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "iteration-0-promotion-candidate",
+      "subject": "29c19372421388d99210f7ee61f173e960bebbf8a26d4f42c00fa48797b0af1d",
+      "opponent": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "evaluation": "logs/evaluation-mWaYSN",
+      "rows": [
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 231,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 3,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 210,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "1fc2d2d2004ee1853f3a9b2c613e334ec906a4f69217ddf371fc8537fa072e9d",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "timeout_tiebreak",
+          "final_tick": 500,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 3,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 13,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-promote-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "loss",
+          "decision": "combat",
+          "final_tick": 246,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "team_id": 418,
+              "x": 19,
+              "y": 19
+            }
+          ],
+          "initial_layout_sha256": "8996a1a396ff579cc7428d32672ad4572239f90ee876180c7bf460ca66592a25",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 0,
+              "Armored": 7,
+              "Miner": 1,
+              "Guard": 3,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-test-initial",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a",
+      "evaluation": "logs/evaluation-0cEhND",
+      "rows": [
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 196,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 191,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-test-initial",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225",
+      "evaluation": "logs/evaluation-1ct1cd",
+      "rows": [
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 190,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 191,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-test-initial",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "evaluation": "logs/evaluation-v3Vqg8",
+      "rows": [
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 246,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 13,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "loss",
+          "decision": "combat",
+          "final_tick": 246,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 13,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "loss",
+          "decision": "combat",
+          "final_tick": 199,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 199,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 1,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-test-selected",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "a7286ae74958c10d91039b11a4bf634ead6a7ca5e3d1c3cf5c12d1adac33cc3a",
+      "evaluation": "logs/evaluation-NDNUSq",
+      "rows": [
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 196,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 191,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 15,
+              "Healthy": 1,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-test-selected",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "2e415c0d7c58412d8c7a292f777f05e1eec5b8c177eb1166c5b4a2234636b225",
+      "evaluation": "logs/evaluation-THwCSF",
+      "rows": [
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 190,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 2,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 184,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 191,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 12,
+              "Armored": 0,
+              "Miner": 0,
+              "Guard": 0,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-test-selected",
+      "subject": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "opponent": "643ea3ca4a9f464bd2428ebe7c13a9fe5a8e33b27ee00ab2b59c4f6904a7a163",
+      "evaluation": "logs/evaluation-m7nm4R",
+      "rows": [
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 246,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 13,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-001",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "loss",
+          "decision": "combat",
+          "final_tick": 246,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "3c5db4c788ebe4d94c21ae2a2b3faaeb3654fd713f3b4b682162d5edeec7e679",
+          "successful_spawns": {
+            "a": {
+              "Light": 0,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 0,
+              "Healthy": 13,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 42,
+          "status": "completed",
+          "outcome_a": "loss",
+          "decision": "combat",
+          "final_tick": 199,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            },
+            "b": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            }
+          }
+        },
+        {
+          "seed": "sp-test-002",
+          "a_team_id": 418,
+          "status": "completed",
+          "outcome_a": "win",
+          "decision": "combat",
+          "final_tick": 199,
+          "initial_cores": [
+            {
+              "team_id": 42,
+              "x": 19,
+              "y": 19
+            },
+            {
+              "team_id": 418,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "initial_layout_sha256": "c2eab9bbb40da343cf6cc3216f8671933b03caa46f9d1dc1c842829a1c1f530d",
+          "successful_spawns": {
+            "a": {
+              "Light": 1,
+              "Healthy": 11,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 1,
+              "Other": 0
+            },
+            "b": {
+              "Light": 1,
+              "Healthy": 10,
+              "Armored": 0,
+              "Miner": 1,
+              "Guard": 2,
+              "Other": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "note": "No candidate promoted. Stronger local fixed-reference results come from handwritten roles, not demonstrated learned gains. Two final seeds are a small correlated sample.",
+  "export_verification": {
+    "evaluation": "logs/evaluation-hzwWaA",
+    "matches": 2,
+    "seed": "export-check-001",
+    "wins": 2,
+    "failures": 0,
+    "embedded_model_confirmed_in_both_logs": true,
+    "binaries": {
+      "server/server": "2f6d676e7d9c8800309df7b4982074c99cb773c39a342e15221dfdf7d352d9ba",
+      "bots/c/bot/strategy-bot/bot": "e7845b95fbddba4db0aa42589fc3ab6d605ca8a4ccf423be72696f7d322cd575",
+      "bots/c/bot/gridmaster/bot": "6968a2a8ddc7e829f4310c85df5c26657a61a0e3ffffd5980a4d6b0b08bb2a81"
+    }
+  }
+}

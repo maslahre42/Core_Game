@@ -1,5 +1,8 @@
 # -------------------- inputs --------------------
 
+LANGUAGE ?= c
+STAGE ?= dev
+
 .PHONY: require-vars
 
 require-vars:
@@ -17,7 +20,7 @@ SERVER_FOLDER		:= server
 SERVER_EXECUTABLE	:= server
 DATA_FOLDER_PATH	:= server/data
 
-CLIENT_LIB_DIR := /workspaces/monorepo/bots/$(LANGUAGE)/client_lib
+CLIENT_LIB_DIR ?= $(if $(wildcard /workspaces/monorepo/bots/$(LANGUAGE)/client_lib),/workspaces/monorepo/bots/$(LANGUAGE)/client_lib,$(CURDIR)/bots/$(LANGUAGE)/client_lib)
 
 BOT_ROOT			:= bots/$(LANGUAGE)/bot
 PLAYER_1_FOLDER		:= $(BOT_ROOT)/my-core-bot
@@ -82,4 +85,4 @@ visualizer:
 
 setup-hooks:
 	@chmod +x .githooks/* || true
-	@git config core.hooksPath .githooks
+	@git config core.hooksPath .githooks || true

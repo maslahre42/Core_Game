@@ -20,10 +20,13 @@ Server::Server(int port) : sock_fd(socket(AF_INET, SOCK_STREAM, 0))
 	int opt = 1;
 	if (setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
 	{
-		Logger::Log(LogLevel::ERROR, "Could not set socket option.");
+		Logger::Log(LogLevel::ERROR, "Could not set socket option SO_REUSEADDR.");
 		close(sock_fd);
 		std::runtime_error("Socket is mandatory to work.");
 	}
+#ifdef SO_REUSEPORT
+	setsockopt(sock_fd, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt));
+#endif
 
 	struct sockaddr_in addr
 	{
@@ -34,7 +37,7 @@ Server::Server(int port) : sock_fd(socket(AF_INET, SOCK_STREAM, 0))
 
 	if (bind(sock_fd, reinterpret_cast<sockaddr *>(&addr), sizeof(addr)) < 0)
 	{
-		Logger::Log(LogLevel::ERROR, "Could not bind on socket.");
+		Logger::Log(LogLevel::ERROR, "Could not bind on socket: " + std::string(strerror(errno)));
 		close(sock_fd);
 		std::runtime_error("Socket is mandatory to work.");
 	}
