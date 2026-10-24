@@ -16,4 +16,10 @@ bots/c/bot/my-core-bot/bot
 bots/c/bot/gridmaster/gridmaster
 bots/c/bot/strategy-bot/strategy-bot
 bots/c/bot/strategy-bot/bot
+bots/c/bot/opponent-rush/opponent-rush
+bots/c/bot/opponent-economy/opponent-economy
+bots/c/bot/opponent-brawler/opponent-brawler
+bots/c/bot/opponent-turtle/opponent-turtle
+__pycache__/
+*.pyc
 *.zip

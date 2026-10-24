@@ -1,0 +1,23 @@
+===============================================================================================
+                      42 CORE CHAMPIONSHIP LEAGUE EVALUATION HARNESS
+Candidate Bot: ./bots/c/bot/my-core-bot/bot
+Opponents (6): opponent-rush, opponent-economy, opponent-brawler, opponent-turtle, gridmaster, strategy-bot
+Matches per opponent: 4 (Total: 24 matches)
+Base Port: 5100
+===============================================================================================
+
+--- Testing vs opponent-rush (4 matches) ---
+  Match  1/ 4 (Port 5100): ✅ WIN_42 (254 ticks, Enemy: CORE_DESTROYED) | ASan: CLEAN | Latency: N/A | Failures: 0
+  Match  2/ 4 (Port 5101): ✅ WIN_42 (260 ticks, Enemy: CORE_DESTROYED) | ASan: CLEAN | Latency: N/A | Failures: 0
+  Match  3/ 4 (Port 5102): ✅ WIN_42 (248 ticks, Enemy: CORE_DESTROYED) | ASan: CLEAN | Latency: N/A | Failures: 0
+  Match  4/ 4 (Port 5103): ✅ WIN_42 (248 ticks, Enemy: CORE_DESTROYED) | ASan: CLEAN | Latency: N/A | Failures: 0
+
+--- Testing vs opponent-economy (4 matches) ---
+  Match  1/ 4 (Port 5104): ✅ WIN_42 (242 ticks, Enemy: CORE_DESTROYED) | ASan: CLEAN | Latency: N/A | Failures: 0
+  Match  2/ 4 (Port 5105): ✅ WIN_42 (249 ticks, Enemy: CORE_DESTROYED) | ASan: CLEAN | Latency: N/A | Failures: 0
+  Match  3/ 4 (Port 5106): ✅ WIN_42 (225 ticks, Enemy: CORE_DESTROYED) | ASan: CLEAN | Latency: N/A | Failures: 0
+  Match  4/ 4 (Port 5107): ✅ WIN_42 (266 ticks, Enemy: CORE_DESTROYED) | ASan: CLEAN | Latency: N/A | Failures: 0
+
+--- Testing vs opponent-brawler (4 matches) ---
+  Match  1/ 4 (Port 5108): ✅ WIN_42 (30000 ticks, Enemy: TIMEOUT_CORE_HP) | ASan: CLEAN | Latency: N/A | Failures: 0
+  Match  2/ 4 (Port 5109): ✅ WIN_42 (30000 ticks, Enemy: TIMEOUT_CORE_HP) | ASan: CLEAN | Latency: N/A | Failures: 0

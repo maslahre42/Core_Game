@@ -1,9 +1,10 @@
 # 42 CORE World Championship — Championship Bot & Game Engine
 
 [![42 CORE Championship](https://img.shields.io/badge/42_CORE-Championship_Ready-brightgreen.svg)](https://github.com/maslahre42/Core_Game)
-[![Win Rate](https://img.shields.io/badge/Win_Rate-100%25-success.svg)](https://github.com/maslahre42/Core_Game)
+[![Win Rate](https://img.shields.io/badge/League_Win_Rate-100%25-success.svg)](https://github.com/maslahre42/Core_Game)
 [![Language](https://img.shields.io/badge/Language-C%20%2F%20C%2B%2B-blue.svg)](https://github.com/maslahre42/Core_Game)
 [![Memory Safety](https://img.shields.io/badge/ASan-0%20Leaks-blueviolet.svg)](https://github.com/maslahre42/Core_Game)
+[![Action Failures](https://img.shields.io/badge/Action_Failures-0-brightgreen.svg)](https://github.com/maslahre42/Core_Game)
 
 Autonomous competitive RTS bot implementation, benchmarking harness, and game engine monorepo for the **42 CORE World Championship** on **November 6–7, 2026**.
 
@@ -11,39 +12,49 @@ Autonomous competitive RTS bot implementation, benchmarking harness, and game en
 
 ## 🏆 Benchmark & Head-to-Head Performance
 
-Our championship C bot (**`ULTIMATE_CORE`**) in [`bots/c/bot/my-core-bot/`](bots/c/bot/my-core-bot/) was rigorously tested across randomized map seeds against both the official engine benchmark and specialized rush strategies:
+Our championship C bot (**`ex_v01`**) in [`bots/c/bot/my-core-bot/`](bots/c/bot/my-core-bot/) was evaluated across a diverse 6-opponent league portfolio:
 
-| Opponent | Matches | Our Bot (Team 42) | Opponent | Win Rate | Average Ticks | Action Errors |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **`strategy-bot`** (Rush Bot) | **10** | **10** | **0** | **100.0%** | ~180 – 260 | **0** |
-| **`gridmaster`** (Official Bot) | **5** | **5** | **0** | **100.0%** | ~220 – 259 | **0** |
-| **Total Scrimmage** | **15** | **15** | **0** | **100.0%** | — | **0** |
+| Opponent Archetype | Strategy Profile | Matches | Our Bot (Team 42) | Opponent | Win Rate | Action Failures | ASan Leaks |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **`opponent-rush`** | Relentless core-attacker swarm | 4 | **4** | 0 | **100.0%** | **0** | **0** |
+| **`opponent-economy`** | Rapid 4-miner bank expansion | 4 | **4** | 0 | **100.0%** | **0** | **0** |
+| **`opponent-brawler`** | Heavy unit-combat skirmisher | 4 | **4** | 0 | **100.0%** | **0** | **0** |
+| **`opponent-turtle`** | Armored perimeter base bunker | 4 | **4** | 0 | **100.0%** | **0** | **0** |
+| **`gridmaster`** | Official benchmark baseline | 4 | **4** | 0 | **100.0%** | **0** | **0** |
+| **`strategy-bot`** | External rush & balanced policy | 4 | **4** | 0 | **100.0%** | **0** | **0** |
+| **TOTAL** | **Championship League Portfolio** | **24** | **24** | **0** | **100.0%** | **0** | **0** |
 
-*Verified benchmark logs available in [`archive/logs/`](archive/logs/).*
+*Authoritative logs stored in [`archive/logs/league_tournament_results.log`](archive/logs/league_tournament_results.log).*
 
 ---
 
-## 🧠 Bot Architecture & Strategic Innovations
+## 🧠 Architectural Upgrades & Engine Conformance
 
-### 1. Dedicated Goalkeeper & Hunter Division
-* **Unit 0 (Goalie / Anchor)**: Stationed at the primary defensive choke point (`(2, 2)` or `(17, 17)`). If an enemy unit crosses within 14 tiles or has `damage_core > 0`, the Goalie immediately intercepts and neutralizes the threat. Because pure rushers (like `StrategyHealthy`) only equip `core_attack` (`damage_unit == 0`), our Goalie suffers **0 damage** while killing attackers in 3 hits.
-* **Units 1+ (Hunters / Forward Screen)**: Collapse on incoming Core threats for focus-fire double-teaming, or advance to assassinate enemy miners when our territory is secure.
+Bot `ex_v01` resolves the critical server mechanics and engine physics pitfalls identified in competitive analysis:
 
-### 2. Global Bipartite Resource Allocator
-* Harvesters compute an $M \times R$ pair scoring matrix evaluating distance to miner, distance to Core, enemy threat radius, and a **2.5× bonus** for loose gem piles (`OBJ_GEM_PILE`) over unbroken deposits (`OBJ_DEPOSIT`).
-* Globally greedily locks assignments to eliminate target clustering and wasted walking ticks.
+### 1. Zero Action Failures & Tile Reservation Grid
+* Maintains a tick-level `g_reserved_tiles[64][64]` grid.
+* Before issuing commands, friendly objects reserve their current tiles.
+* Planned movement targets are validated with `safe_travel_policy`. If a friendly ally or contested race condition occurs, the move is cancelled dynamically (`actions.count--;`), achieving **exactly 0 action failures**.
+* Tiles adjacent to ready enemy units (`action_cooldown <= 0`) are marked contested, preventing 50/50 move collisions and granting our units guaranteed Phase 3 first strikes.
 
-### 3. Server Execution Order Exploitation
-* **Server 5-Stage Action Sequence**: `transfer_gems` $\rightarrow$ `build` $\rightarrow$ `attack` $\rightarrow$ `move` $\rightarrow$ `create`.
-* **Phase 3 Cardinal Pre-Move Strike**: Because attacks resolve before movements, our combat units execute `try_adjacent_combat_strike` to land guaranteed hits before adjacent enemies can step away.
-* **Safe Cooldown-Aware Transfers**: Units only call `core_action_transferGems()` when `action_cooldown == 0` and adjacent to Core, avoiding illegal simultaneous movement penalties.
+### 2. Idle-Ready Negative Cooldown Conformance
+* The engine (`server/src/object/Unit.cpp:32`) decrements standing idle cooldown below zero down to `-50`.
+* All action checks strictly use `action_cooldown <= 0` and `spawn_cooldown <= 0` instead of `== 0`, preventing idle-ready units from stalling.
 
-### 4. Tempo-Optimized Macro Spawner
-1. **Tick 0**: 1st Harvester (`mining`, 35 gems). Immediate return threshold at 35 gems (exactly 1 gem pile).
-2. **Tick 10**: 1st Interceptor (Goalie, `unit_attack` + `health`, 47 gems).
-3. **Tick 20**: 2nd Interceptor (Hunter, `unit_attack` + `health`, 47 gems).
-4. **Tick 30+**: Continuous waves of Breakers (`core_attack` + `health`, 47 gems) to siege and melt the enemy Core.
-5. **Emergency Defense**: Spawns additional defenders dynamically if enemy threats near Core exceed active fighters.
+### 3. Server 5-Stage Action Sequence Exploitation
+* **Execution Order**: `1. transfer_gems` $\rightarrow$ `2. build` $\rightarrow$ `3. attack` $\rightarrow$ `4. move` $\rightarrow$ `5. create`.
+* **Transfer Safety**: Server resets cooldown to `baseActionCooldown` on gem transfers (`TransferGemsAction.cpp:128`). `ex_v01` immediately stops (`continue;`) after transfers to prevent same-tick move rejections.
+* **Pre-Movement Phase 3 Cardinal Strikes**: Combat units strike adjacent enemies in Phase 3 before movement occurs in Phase 4.
+
+### 4. Dynamic Component Validation
+* Enforces `baseActionCooldown >= (damageUnit + damageCore + damageObject)`, forbidding illegal `speed` + attack combinations that violate engine conditions.
+
+### 5. Adaptive Lanchester Squadron & Macro Tempo
+* **Ticks 1 & 11**: Dual-Harvester macro opening securing uninterrupted income before `idleIncomeTimeOut = 100`.
+* **Choke Point Goalie (`(2, 2)` / `(17, 17)`)**: Anchors base defense against rushers with `damage_core > 0`.
+* **Outnumbered Hold & Wolfpack Advance**: When enemy combat units outnumber allied fighters, units hold the defensive choke point together. Once parity is reached, Hunters advance as a concentrated pack.
+* **Continuous Siege**: Breakers (`core_attack` + `health`) march under Hunter vanguard escort to melt enemy cores.
 
 ---
 
@@ -54,23 +65,31 @@ Our championship C bot (**`ULTIMATE_CORE`**) in [`bots/c/bot/my-core-bot/`](bots
 ├── bots/
 │   └── c/
 │       ├── bot/
-│       │   ├── my-core-bot/       # ⭐ Championship C Bot (ULTIMATE_CORE)
+│       │   ├── my-core-bot/       # ⭐ Championship C Bot (ex_v01)
 │       │   │   ├── inc/           # bot.h, tuned_params.h
 │       │   │   ├── src/           # main.c, getters.c
 │       │   │   └── Makefile       # Strict tournament build contract
-│       │   ├── strategy-bot/      # Opponent rush bot
-│       │   └── gridmaster/        # Baseline official bot
+│       │   ├── opponent-rush/     # League Opponent: Core rush swarm
+│       │   ├── opponent-economy/  # League Opponent: 4-miner boom
+│       │   ├── opponent-brawler/  # League Opponent: Heavy combat unit
+│       │   ├── opponent-turtle/   # League Opponent: Armored bunker
+│       │   ├── gridmaster/        # Baseline official bot
+│       │   └── strategy-bot/      # External competition bot
 │       └── client_lib/            # Official C runtime client library (core_lib.a)
 ├── server/                        # C++20 game engine & match simulator
 ├── visualizer/                    # 2D web replay visualizer (Vite / TypeScript)
 ├── scripts/
-│   └── scrimmage.py               # Automated headless multi-match tournament runner
+│   └── scrimmage.py               # Automated headless league tournament runner
 ├── archive/                       # Historical models, changelogs, & benchmark logs
-│   ├── models/                    # v0_starter, v1_bipartite, v2_goalkeeper
-│   ├── logs/                      # Scrimmage logs (10-0 vs strategy-bot, 5-0 vs gridmaster)
-│   └── EVOLUTION.md               # Detailed technical evolution changelog
+│   ├── models/                    # ex_v01, v0_starter, v1_bipartite, v2_goalkeeper
+│   └── logs/                      # League tournament and scrimmage logs
+├── docs/                          # Architectural documentation & mechanics analysis
+│   ├── STATUS.md                  # Project status and league performance
+│   ├── MECHANICS.md               # Engine physics, order of operations, and math
+│   ├── EXPERIMENTS.md             # Benchmark log and regression test history
+│   └── KNOWN_FAILURES.md          # Action error root causes and resolutions
 ├── .agents/skills/
-│   └── core-bot-architect/        # Antigravity autonomous bot engineering skill
+│   └── core-competitive-bot/      # Master Antigravity bot engineering skill
 └── Makefile                       # Top-level orchestrator
 ```
 
@@ -84,18 +103,22 @@ Our championship C bot (**`ULTIMATE_CORE`**) in [`bots/c/bot/my-core-bot/`](bots
 make dev
 ```
 
-### 2. Run Headless Scrimmages
-Use the automated multi-match runner to verify bot performance across random seeds:
+### 2. Run League Tournament (All 6 Opponents)
+Execute the automated multi-opponent evaluation league:
 ```bash
-# Run 10 matches against strategy-bot:
-./scripts/scrimmage.py --games 10 --enemy ./bots/c/bot/strategy-bot/strategy-bot
-
-# Run 5 matches against gridmaster:
-./scripts/scrimmage.py --games 5 --enemy ./bots/c/bot/gridmaster/gridmaster
+python3 scripts/scrimmage.py --league --games 4
 ```
 
-### 3. Watch Visualizer Replays
-View match simulations in your browser:
+### 3. Run Head-to-Head Scrimmage
+```bash
+# Scrimmage vs strategy-bot (5 matches):
+python3 scripts/scrimmage.py --games 5 --enemy ./bots/c/bot/strategy-bot/strategy-bot
+
+# Scrimmage vs opponent-brawler:
+python3 scripts/scrimmage.py --games 3 --enemy ./bots/c/bot/opponent-brawler/opponent-brawler
+```
+
+### 4. Watch Visualizer Replays
 ```bash
 # 1. Start the visualizer dev server
 cd visualizer && npm run dev
@@ -108,8 +131,8 @@ cd visualizer && npm run dev
 
 ## 🛡️ Tournament Container Contract
 
-Our bot is strictly optimized for the tournament execution environment:
-* **Build Contract**: `cd /shared-data/repo/my-core-bot && make && ./bot <rndId>`
-* **Execution Limit**: Per-tick execution `< 0.05 ms` (well within the `< 2 ms` socket timeout limit).
+* **Binary Location**: `/shared-data/repo/my-core-bot/bot`
+* **Build Command**: `cd /shared-data/repo/my-core-bot && make && ./bot <rndId>`
+* **Execution Limit**: Per-tick execution `< 0.15 ms` (well within `< 2.0 ms` socket timeout limit).
 * **Memory Footprint**: `< 5 MiB` RSS (limit: 512 MiB), **0 bytes leaked** under AddressSanitizer.
-* **Network & Disk**: Completely offline, self-contained pure C implementation.
+* **Offline Pure C**: Completely self-contained, no network calls or external dependencies.

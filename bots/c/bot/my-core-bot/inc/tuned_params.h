@@ -14,13 +14,13 @@
 # define TARGET_EARLY_MINERS          1
 # define MAX_MINERS                   2
 # define MINER_BASE_RETURN_GEMS       35
-# define DEFENSE_PANIC_RADIUS         14
+# define DEFENSE_PANIC_RADIUS         10
 
 # define WEIGHT_GEM_PILE_BONUS        2.5f
 # define WEIGHT_DEPOSIT_BASE          100.0f
 # define WEIGHT_MINER_DIST_PENALTY    2.0f
 # define WEIGHT_CORE_DIST_PENALTY     1.0f
-# define WEIGHT_ENEMY_THREAT_PENALTY  50.0f
+# define WEIGHT_ENEMY_THREAT_PENALTY  200.0f
 
 # define SCORE_CORE_THREAT_WEIGHT     250
 # define SCORE_CORE_ATTACKER_BONUS    3000

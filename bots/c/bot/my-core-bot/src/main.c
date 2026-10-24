@@ -1,11 +1,15 @@
 #include "bot.h"
+#include "core_lib_internal.h"
 #include "tuned_params.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_TRACKED_UNITS 1024
 #define MAX_TRACKED_RES 256
+#define MAX_GRID_DIM 64
+#define MAX_PAIRS 512
 
 typedef enum e_role_state
 {
@@ -31,6 +35,12 @@ typedef struct s_pair_score
 	float score;
 } t_pair_score;
 
+/* Zero heap allocations: static buffers for tick loops */
+static t_unit_brain g_brains[MAX_TRACKED_UNITS];
+static bool g_brain_init = false;
+static bool g_reserved_tiles[MAX_GRID_DIM][MAX_GRID_DIM];
+static t_pair_score g_pairs[MAX_PAIRS];
+
 /* ========================================================================== */
 /* UTILITY & GEOMETRY HELPERS                                                 */
 /* ========================================================================== */
@@ -44,9 +54,20 @@ static int manhattan_dist(t_pos a, t_pos b)
 	return (dx + dy);
 }
 
+static size_t count_obj_array(t_obj **arr)
+{
+	size_t count = 0;
+	while (arr && arr[count] != NULL)
+		count++;
+	return (count);
+}
+
 static bool is_resource(const t_obj *obj)
 {
-	return (obj && (obj->type == OBJ_GEM_PILE || obj->type == OBJ_DEPOSIT));
+	if (!obj || obj->hp == 0) return false;
+	if (obj->type == OBJ_DEPOSIT) return true;
+	if (obj->type == OBJ_GEM_PILE && obj->s_deposit_gems_pile.gems > 0) return true;
+	return false;
 }
 
 static bool is_enemy_unit(const t_obj *obj)
@@ -54,118 +75,208 @@ static bool is_enemy_unit(const t_obj *obj)
 	return (obj && obj->type == OBJ_UNIT && obj->s_unit.team_id != game.my_team_id && obj->hp > 0);
 }
 
-static size_t count_obj_array(t_obj **arr)
-{
-	size_t n = 0;
-	while (arr && arr[n] != NULL)
-		n++;
-	return (n);
-}
-
-/* Static leak-free per-unit memory pool */
-static t_unit_brain g_unit_brains[MAX_TRACKED_UNITS];
-
-static t_unit_brain *get_brain(t_obj *unit)
+static t_unit_brain *get_brain(const t_obj *unit)
 {
 	if (!unit) return NULL;
+	if (!g_brain_init)
+	{
+		memset(g_brains, 0, sizeof(g_brains));
+		g_brain_init = true;
+	}
 	size_t idx = unit->id % MAX_TRACKED_UNITS;
-	t_unit_brain *brain = &g_unit_brains[idx];
-
-	if (unit->pos.x == brain->last_pos.x && unit->pos.y == brain->last_pos.y && unit->s_unit.action_cooldown == 0)
-	{
-		brain->stuck_ticks++;
-	}
-	else if (unit->pos.x != brain->last_pos.x || unit->pos.y != brain->last_pos.y)
-	{
-		brain->stuck_ticks = 0;
-		brain->last_pos = unit->pos;
-	}
-	return (brain);
+	return (&g_brains[idx]);
 }
 
-/* Computes local enemy threat near a position */
 static int count_enemies_within(t_pos pos, t_obj **enemies, int radius)
 {
 	int count = 0;
 	for (size_t i = 0; enemies && enemies[i] != NULL; i++)
 	{
-		if (manhattan_dist(pos, enemies[i]->pos) <= radius) count++;
+		if (enemies[i]->hp > 0 && manhattan_dist(pos, enemies[i]->pos) <= radius)
+			count++;
 	}
 	return (count);
 }
 
 /* ========================================================================== */
-/* EXACT STEP-COOLDOWN & ADJACENCY MICRO                                      */
+/* TILE RESERVATION & COLLISION-FREE SAFE TRAVEL                              */
+/* ========================================================================== */
+
+static void reset_tick_reservations(void)
+{
+	memset(g_reserved_tiles, 0, sizeof(g_reserved_tiles));
+	/* All existing board objects occupy their current tile at tick start */
+	for (size_t i = 0; game.objects && game.objects[i] != NULL; i++)
+	{
+		t_obj *o = game.objects[i];
+		if (!o || o->hp == 0) continue;
+		if (o->pos.x < MAX_GRID_DIM && o->pos.y < MAX_GRID_DIM)
+		{
+			g_reserved_tiles[o->pos.x][o->pos.y] = true;
+		}
+	}
+}
+
+static t_tile_travelability safe_travel_policy(t_pos pos, const t_obj *unit)
+{
+	if (pos.x < MAX_GRID_DIM && pos.y < MAX_GRID_DIM && g_reserved_tiles[pos.x][pos.y])
+		return (t_tile_travelability){0, CORE_TRAVEL_BLOCK};
+
+	t_obj *object = core_get_obj_from_pos(pos);
+	if (!object)
+	{
+		/* If unit deals 0 core damage, do not step into cardinal tiles adjacent to enemy core */
+		t_obj *enemy_core = ft_get_core_opponent();
+		if (enemy_core && unit->s_unit.properties.damage_core == 0 &&
+			manhattan_dist(pos, enemy_core->pos) <= 1)
+		{
+			return (t_tile_travelability){0, CORE_TRAVEL_BLOCK};
+		}
+
+		/* Check if empty tile is contested by a ready enemy unit */
+		for (size_t i = 0; game.objects && game.objects[i] != NULL; i++)
+		{
+			t_obj *o = game.objects[i];
+			if (o->type == OBJ_UNIT && o->s_unit.team_id != game.my_team_id && o->hp > 0)
+			{
+				if (o->s_unit.action_cooldown <= 0 && manhattan_dist(pos, o->pos) == 1)
+					return (t_tile_travelability){0, CORE_TRAVEL_BLOCK};
+			}
+		}
+
+		return (t_tile_travelability){1, CORE_TRAVEL_PASS};
+	}
+
+	/* Friendly objects cannot be traversed or attacked */
+	if (object->type == OBJ_UNIT && object->s_unit.team_id == game.my_team_id)
+		return (t_tile_travelability){0, CORE_TRAVEL_BLOCK};
+	if (object->type == OBJ_CORE && object->s_core.team_id == game.my_team_id)
+		return (t_tile_travelability){0, CORE_TRAVEL_BLOCK};
+
+	/* Enemy Core */
+	if (object->type == OBJ_CORE)
+	{
+		if (unit->s_unit.properties.damage_core > 0)
+			return (t_tile_travelability){1, CORE_TRAVEL_ATTACK};
+		return (t_tile_travelability){0, CORE_TRAVEL_BLOCK};
+	}
+
+	/* Gem Piles: collected via attack */
+	if (object->type == OBJ_GEM_PILE)
+	{
+		return (t_tile_travelability){1, CORE_TRAVEL_ATTACK};
+	}
+
+	/* Obstacles: Deposit or Wall */
+	if (object->type == OBJ_DEPOSIT || object->type == OBJ_WALL)
+	{
+		unsigned long dmg = unit->s_unit.properties.damage_object;
+		if (dmg == 0) return (t_tile_travelability){0, CORE_TRAVEL_BLOCK};
+		unsigned int attacks = (unsigned int)(object->hp / dmg + (object->hp % dmg != 0));
+		return (t_tile_travelability){attacks + 1, CORE_TRAVEL_ATTACK};
+	}
+
+	/* Enemy Unit */
+	if (object->type == OBJ_UNIT)
+	{
+		unsigned long dmg = unit->s_unit.properties.damage_unit;
+		if (dmg == 0) return (t_tile_travelability){0, CORE_TRAVEL_BLOCK};
+		unsigned int attacks = (unsigned int)(object->hp / dmg + (object->hp % dmg != 0));
+		return (t_tile_travelability){attacks + 1, CORE_TRAVEL_ATTACK};
+	}
+
+	return (t_tile_travelability){1, CORE_TRAVEL_PASS};
+}
+
+static void safe_travel(t_obj *unit, t_pos dest)
+{
+	if (!unit || unit->s_unit.action_cooldown > 0) return;
+	unsigned int prev_count = actions.count;
+	core_action_travel(unit, dest, safe_travel_policy);
+	if (actions.count > prev_count)
+	{
+		t_action *act = &actions.list[actions.count - 1];
+		if (act->type == ACTION_MOVE)
+		{
+			t_pos target = act->data.move.pos;
+			if (target.x < MAX_GRID_DIM && target.y < MAX_GRID_DIM)
+			{
+				if (g_reserved_tiles[target.x][target.y])
+				{
+					/* Collision: tile was reserved this tick! Cancel move to avoid server failure */
+					actions.count--;
+					if (unit->pos.x < MAX_GRID_DIM && unit->pos.y < MAX_GRID_DIM)
+						g_reserved_tiles[unit->pos.x][unit->pos.y] = true;
+				}
+				else
+				{
+					g_reserved_tiles[target.x][target.y] = true;
+				}
+			}
+		}
+	}
+}
+
+/* ========================================================================== */
+/* SUBSYSTEM 1: RESOURCE GATHERING & DYNAMIC MATCHING                         */
 /* ========================================================================== */
 
 static bool should_harvester_return(t_obj *m, t_obj *own_core, size_t res_count, t_obj **enemies)
 {
-	unsigned int gems = m->s_unit.gems;
-	if (gems == 0) return (false);
-	if (res_count == 0) return (true);
+	if (!m || !own_core) return false;
+	unsigned long gems = m->s_unit.gems;
+	unsigned long cap = m->s_unit.properties.max_gems;
 
-	int d_core = own_core ? manhattan_dist(m->pos, own_core->pos) : 99;
+	/* Safety First: if enemy is near, retreat to friendly Core immediately */
+	if (count_enemies_within(m->pos, enemies, 4) > 0)
+		return true;
 
-	/* Emergency retreat with gems if an enemy fighter is closing in */
-	if (count_enemies_within(m->pos, enemies, 3) > 0 && gems >= 15) return (true);
+	if (gems == 0) return false;
+	if (cap > 0 && gems >= cap) return true;
+	if (gems >= MINER_BASE_RETURN_GEMS) return true;
+	if (res_count == 0 && gems > 0) return true;
 
-	/* Fast economy injection: if close to Core and our gems complete an Interceptor or Breaker */
-	if (own_core && own_core->s_core.spawn_cooldown <= (unsigned int)d_core &&
-		(own_core->s_core.gems + gems) >= INTERCEPTOR_COST && d_core <= 6)
-	{
-		return (true);
-	}
-
-	return (gems >= MINER_BASE_RETURN_GEMS);
+	return false;
 }
 
-/*
-** Exploits Server Phase 3 (attack) executing BEFORE Phase 4 (move).
-** If an enemy or targetable object is at Manhattan distance 1 and our
-** action_cooldown == 0, attack immediately for a guaranteed hit.
-*/
-static bool try_adjacent_combat_strike(t_obj *unit, t_obj **enemies, t_obj *enemy_core)
+static bool try_adjacent_combat_strike(t_obj *attacker, t_obj **enemies, t_obj *enemy_core)
 {
-	if (unit->s_unit.action_cooldown != 0) return (false);
+	if (!attacker || attacker->s_unit.action_cooldown > 0) return false;
 
-	/* 1. Prioritize enemy Core ONLY IF this unit has damage_core > 0 */
-	if (enemy_core && unit->s_unit.properties.damage_core > 0 && manhattan_dist(unit->pos, enemy_core->pos) == 1)
+	/* Priority 1: Destroy enemy core if adjacent and unit has damage_core */
+	if (enemy_core && attacker->s_unit.properties.damage_core > 0 &&
+		manhattan_dist(attacker->pos, enemy_core->pos) == 1)
 	{
-		core_action_attack(unit, enemy_core);
-		return (true);
+		core_action_attack(attacker, enemy_core);
+		return true;
 	}
 
-	/* 2. Find lowest-HP cardinally adjacent enemy unit if unit has damage_unit > 0 */
-	if (unit->s_unit.properties.damage_unit > 0)
+	/* Priority 2: Attack adjacent enemy unit if unit has damage_unit */
+	if (attacker->s_unit.properties.damage_unit > 0)
 	{
-		t_obj *best_adj = NULL;
-		unsigned int lowest_hp = 999999;
-
+		t_obj *target = NULL;
+		int min_hp = 9999;
 		for (size_t i = 0; enemies && enemies[i] != NULL; i++)
 		{
 			t_obj *en = enemies[i];
-			if (manhattan_dist(unit->pos, en->pos) == 1)
+			if (en->hp > 0 && manhattan_dist(attacker->pos, en->pos) == 1)
 			{
-				if (en->hp < lowest_hp)
+				if ((int)en->hp < min_hp)
 				{
-					lowest_hp = en->hp;
-					best_adj = en;
+					min_hp = (int)en->hp;
+					target = en;
 				}
 			}
 		}
-
-		if (best_adj)
+		if (target)
 		{
-			core_action_attack(unit, best_adj);
-			return (true);
+			core_action_attack(attacker, target);
+			return true;
 		}
 	}
-	return (false);
-}
 
-/* ========================================================================== */
-/* SUBSYSTEM 1: GLOBAL BIPARTITE HARVESTER ALLOCATOR                          */
-/* ========================================================================== */
+	return false;
+}
 
 static void run_harvesters(t_obj *own_core, t_obj **enemies)
 {
@@ -191,7 +302,7 @@ static void run_harvesters(t_obj *own_core, t_obj **enemies)
 		t_obj *m = miners[i];
 		t_unit_brain *brain = get_brain(m);
 
-		if (m->s_unit.action_cooldown != 0)
+		if (m->s_unit.action_cooldown > 0)
 		{
 			miner_handled[i] = true;
 			continue;
@@ -201,14 +312,16 @@ static void run_harvesters(t_obj *own_core, t_obj **enemies)
 		{
 			core_action_transferGems(m, own_core->pos, m->s_unit.gems);
 			if (brain) brain->state = STATE_GATHER;
+			if (m->pos.x < MAX_GRID_DIM && m->pos.y < MAX_GRID_DIM)
+				g_reserved_tiles[m->pos.x][m->pos.y] = true;
 			miner_handled[i] = true;
-			continue;
+			continue; /* Transfer immediately resets cooldown on server; do not move! */
 		}
 
 		if (should_harvester_return(m, own_core, res_count, enemies))
 		{
 			if (brain) brain->state = STATE_RETURN;
-			if (own_core) core_action_travel(m, own_core->pos, NULL);
+			if (own_core) safe_travel(m, own_core->pos);
 			miner_handled[i] = true;
 		}
 		else
@@ -217,74 +330,62 @@ static void run_harvesters(t_obj *own_core, t_obj **enemies)
 		}
 	}
 
-	/* Pass 2: Global Bipartite Cost-Matrix Assignment for Gathering Miners */
-	size_t pair_cap = miner_count * res_count;
-	t_pair_score *pairs = NULL;
+	/* Pass 2: Global Bipartite Cost-Matrix Assignment using Static Buffer */
 	size_t pair_count = 0;
-
-	if (pair_cap > 0)
+	for (size_t i = 0; i < miner_count && i < MAX_TRACKED_UNITS; i++)
 	{
-		pairs = (t_pair_score *)malloc(sizeof(t_pair_score) * pair_cap);
+		if (miner_handled[i]) continue;
+		t_obj *m = miners[i];
+		for (size_t r = 0; r < res_count && r < MAX_TRACKED_RES && pair_count < MAX_PAIRS; r++)
+		{
+			t_obj *res = resources[r];
+			int d_miner = manhattan_dist(m->pos, res->pos);
+			int d_core = own_core ? manhattan_dist(res->pos, own_core->pos) : 10;
+			int threat = count_enemies_within(res->pos, enemies, 3);
+
+			float mult = (res->type == OBJ_GEM_PILE) ? WEIGHT_GEM_PILE_BONUS : 1.0f;
+			float score = (WEIGHT_DEPOSIT_BASE * mult) - (WEIGHT_MINER_DIST_PENALTY * (float)d_miner) -
+						  (WEIGHT_CORE_DIST_PENALTY * (float)d_core) -
+						  (WEIGHT_ENEMY_THREAT_PENALTY * (float)threat);
+
+			g_pairs[pair_count].miner_idx = i;
+			g_pairs[pair_count].res_idx = r;
+			g_pairs[pair_count].score = score;
+			pair_count++;
+		}
 	}
 
-	if (pairs)
+	/* Greedily lock the highest-scoring (Miner, Resource) pairs globally */
+	for (size_t step = 0; step < miner_count; step++)
 	{
-		for (size_t i = 0; i < miner_count && i < MAX_TRACKED_UNITS; i++)
+		int best_p = -1;
+		float best_val = -1e9f;
+
+		for (size_t p = 0; p < pair_count; p++)
 		{
-			if (miner_handled[i]) continue;
-			t_obj *m = miners[i];
-			for (size_t r = 0; r < res_count && r < MAX_TRACKED_RES; r++)
+			size_t mi = g_pairs[p].miner_idx;
+			size_t ri = g_pairs[p].res_idx;
+			if (!miner_handled[mi] && !res_claimed[ri] && g_pairs[p].score > best_val)
 			{
-				t_obj *res = resources[r];
-				int d_miner = manhattan_dist(m->pos, res->pos);
-				int d_core = own_core ? manhattan_dist(res->pos, own_core->pos) : 10;
-				int threat = count_enemies_within(res->pos, enemies, 3);
-
-				float mult = (res->type == OBJ_GEM_PILE) ? WEIGHT_GEM_PILE_BONUS : 1.0f;
-				float score = (WEIGHT_DEPOSIT_BASE * mult) - (WEIGHT_MINER_DIST_PENALTY * (float)d_miner) -
-							  (WEIGHT_CORE_DIST_PENALTY * (float)d_core) -
-							  (WEIGHT_ENEMY_THREAT_PENALTY * (float)threat);
-
-				pairs[pair_count].miner_idx = i;
-				pairs[pair_count].res_idx = r;
-				pairs[pair_count].score = score;
-				pair_count++;
+				best_val = g_pairs[p].score;
+				best_p = (int)p;
 			}
 		}
 
-		/* Greedily lock the highest-scoring (Miner, Resource) pairs globally */
-		for (size_t step = 0; step < miner_count; step++)
-		{
-			int best_p = -1;
-			float best_val = -1e9f;
+		if (best_p < 0) break;
 
-			for (size_t p = 0; p < pair_count; p++)
-			{
-				size_t mi = pairs[p].miner_idx;
-				size_t ri = pairs[p].res_idx;
-				if (!miner_handled[mi] && !res_claimed[ri] && pairs[p].score > best_val)
-				{
-					best_val = pairs[p].score;
-					best_p = (int)p;
-				}
-			}
+		size_t win_m = g_pairs[best_p].miner_idx;
+		size_t win_r = g_pairs[best_p].res_idx;
+		miner_handled[win_m] = true;
+		res_claimed[win_r] = true;
 
-			if (best_p < 0) break;
+		t_obj *m = miners[win_m];
+		t_obj *target_res = resources[win_r];
 
-			size_t win_m = pairs[best_p].miner_idx;
-			size_t win_r = pairs[best_p].res_idx;
-			miner_handled[win_m] = true;
-			res_claimed[win_r] = true;
-
-			t_obj *m = miners[win_m];
-			t_obj *target_res = resources[win_r];
-
-			if (target_res->type == OBJ_DEPOSIT && manhattan_dist(m->pos, target_res->pos) == 1)
-				core_action_attack(m, target_res);
-			else
-				core_action_travel(m, target_res->pos, NULL);
-		}
-		free(pairs);
+		if (manhattan_dist(m->pos, target_res->pos) == 1)
+			core_action_attack(m, target_res);
+		else
+			safe_travel(m, target_res->pos);
 	}
 
 	/* Fallback: if more miners than resources, send remaining gatherers to nearest resource or Core */
@@ -294,9 +395,9 @@ static void run_harvesters(t_obj *own_core, t_obj **enemies)
 		{
 			t_obj *m = miners[i];
 			if (res_count > 0)
-				core_action_travel(m, resources[0]->pos, NULL);
+				safe_travel(m, resources[0]->pos);
 			else if (own_core)
-				core_action_travel(m, own_core->pos, NULL);
+				safe_travel(m, own_core->pos);
 		}
 	}
 
@@ -320,6 +421,15 @@ static void run_interceptors(t_obj *own_core, t_obj *enemy_core, t_obj **enemies
 		return;
 	}
 
+	/* Count active enemy combat threats */
+	size_t enemy_combat_units = 0;
+	for (size_t e = 0; enemies && enemies[e] != NULL; e++)
+	{
+		if (enemies[e]->hp > 0 &&
+			(enemies[e]->s_unit.properties.damage_unit > 0 || enemies[e]->s_unit.properties.damage_core > 0))
+			enemy_combat_units++;
+	}
+
 	/* Defensive Anchor Point: Choke position between our Core and map center */
 	t_pos anchor_pos;
 	if (own_core)
@@ -339,9 +449,12 @@ static void run_interceptors(t_obj *own_core, t_obj *enemy_core, t_obj **enemies
 		if (own_core && f->s_unit.gems > 0 && manhattan_dist(f->pos, own_core->pos) <= 1)
 		{
 			core_action_transferGems(f, own_core->pos, f->s_unit.gems);
+			if (f->pos.x < MAX_GRID_DIM && f->pos.y < MAX_GRID_DIM)
+				g_reserved_tiles[f->pos.x][f->pos.y] = true;
+			continue; /* Transfer immediately resets cooldown on server; do not move! */
 		}
 
-		if (f->s_unit.action_cooldown != 0) continue;
+		if (f->s_unit.action_cooldown > 0) continue;
 
 		/* 1. Pre-move guaranteed cardinal strike */
 		if (try_adjacent_combat_strike(f, enemies, enemy_core)) continue;
@@ -353,6 +466,7 @@ static void run_interceptors(t_obj *own_core, t_obj *enemy_core, t_obj **enemies
 		for (size_t e = 0; enemies && enemies[e] != NULL; e++)
 		{
 			t_obj *en = enemies[e];
+			if (en->hp == 0) continue;
 			int d_me = manhattan_dist(f->pos, en->pos);
 			int d_core = own_core ? manhattan_dist(own_core->pos, en->pos) : 99;
 
@@ -364,29 +478,35 @@ static void run_interceptors(t_obj *own_core, t_obj *enemy_core, t_obj **enemies
 				score += SCORE_CORE_ATTACKER_BONUS;
 				score += (38 - d_core) * SCORE_CORE_THREAT_WEIGHT;
 			}
-			/* Priority B: Any enemy unit trespassing in our defensive half */
+			/* Priority B: Enemy combat units targeting our army */
+			else if (en->s_unit.properties.damage_unit > 0)
+			{
+				score += 1500;
+				score += (38 - d_core) * 100;
+			}
+			/* Priority C: Any enemy unit trespassing in our defensive half */
 			else if (d_core <= DEFENSE_PANIC_RADIUS)
 			{
 				score += (38 - d_core) * (SCORE_CORE_THREAT_WEIGHT / 2);
 			}
-			/* Priority C: Enemy Harvesters in the field */
+			/* Priority D: Enemy Harvesters in the field */
 			else if (en->s_unit.properties.damage_object > 0)
 			{
 				score += SCORE_HUNT_MINER_BONUS;
 				if (en->s_unit.gems > 0) score += SCORE_ENEMY_MINER_GEMS;
 			}
 
-			/* Priority D: Protecting friendly miners */
+			/* Priority E: Protecting friendly miners */
 			for (size_t m = 0; m < miner_count; m++)
 			{
-				if (manhattan_dist(miners[m]->pos, en->pos) <= 2)
+				if (manhattan_dist(miners[m]->pos, en->pos) <= 3)
 				{
-					score += SCORE_PROTECT_MINER_BONUS;
+					score += 1000;
 					break;
 				}
 			}
 
-			/* Priority E: Low HP focus fire */
+			/* Priority F: Low HP focus fire */
 			if (en->hp <= 3 && d_me <= 2) score += SCORE_LETHAL_BLOW_BONUS;
 
 			if (score > best_score)
@@ -397,25 +517,31 @@ static void run_interceptors(t_obj *own_core, t_obj *enemy_core, t_obj **enemies
 		}
 
 		/*
-		** Tactical Role Separation:
+		** Tactical Role Separation & Lanchester Rallying:
 		** Fighter 0 is the dedicated DEFENDER (Goalie).
-		** If no enemy is threatening our half, Fighter 0 holds the anchor choke point.
+		** If outnumbered, hold anchor together to avoid feeding units one by one.
 		*/
 		bool is_dedicated_defender = (i == 0);
 
 		if (best_enemy)
 		{
 			int d_best_core = own_core ? manhattan_dist(own_core->pos, best_enemy->pos) : 99;
-			if (is_dedicated_defender && d_best_core > DEFENSE_PANIC_RADIUS && best_enemy->s_unit.properties.damage_core == 0)
+			if (enemy_combat_units > fighter_count && d_best_core > DEFENSE_PANIC_RADIUS)
 			{
-				/* Enemy is far away: Defender holds the anchor position */
+				/* Outnumbered: Hold anchor position together and ambush approaching enemies */
 				if (f->pos.x != anchor_pos.x || f->pos.y != anchor_pos.y)
-					core_action_travel(f, anchor_pos, NULL);
+					safe_travel(f, anchor_pos);
+			}
+			else if (is_dedicated_defender && d_best_core > DEFENSE_PANIC_RADIUS &&
+				best_enemy->s_unit.properties.damage_core == 0)
+			{
+				/* Defender holds the anchor position */
+				if (f->pos.x != anchor_pos.x || f->pos.y != anchor_pos.y)
+					safe_travel(f, anchor_pos);
 			}
 			else
 			{
-				/* Intercept and destroy the target */
-				core_action_travel(f, best_enemy->pos, NULL);
+				safe_travel(f, best_enemy->pos);
 			}
 		}
 		else
@@ -424,13 +550,20 @@ static void run_interceptors(t_obj *own_core, t_obj *enemy_core, t_obj **enemies
 			if (is_dedicated_defender)
 			{
 				if (f->pos.x != anchor_pos.x || f->pos.y != anchor_pos.y)
-					core_action_travel(f, anchor_pos, NULL);
+					safe_travel(f, anchor_pos);
 			}
-			else if (enemy_core)
+			else
 			{
-				/* Hunters advance to map center / scout towards enemy core */
-				t_pos mid_pos = {(unsigned short)(game.grid_size / 2), (unsigned short)(game.grid_size / 2)};
-				core_action_travel(f, mid_pos, NULL);
+				/* Hunters advance toward enemy core to escort Breakers and clear defenders! */
+				if (enemy_core)
+				{
+					t_pos escort_pos = enemy_core->pos;
+					if (escort_pos.x >= 2) escort_pos.x -= 2;
+					else escort_pos.x += 2;
+					if (escort_pos.y >= 2) escort_pos.y -= 2;
+					else escort_pos.y += 2;
+					safe_travel(f, escort_pos);
+				}
 			}
 		}
 	}
@@ -446,14 +579,19 @@ static void run_breakers(t_obj *own_core, t_obj *enemy_core, t_obj **enemies)
 	{
 		t_obj *b = breakers[i];
 		if (own_core && b->s_unit.gems > 0 && manhattan_dist(b->pos, own_core->pos) <= 1)
+		{
 			core_action_transferGems(b, own_core->pos, b->s_unit.gems);
+			if (b->pos.x < MAX_GRID_DIM && b->pos.y < MAX_GRID_DIM)
+				g_reserved_tiles[b->pos.x][b->pos.y] = true;
+			continue; /* Transfer immediately resets cooldown on server; do not move! */
+		}
 
-		if (b->s_unit.action_cooldown != 0) continue;
+		if (b->s_unit.action_cooldown > 0) continue;
 
 		if (try_adjacent_combat_strike(b, enemies, enemy_core)) continue;
 
 		if (enemy_core)
-			core_action_travel(b, enemy_core->pos, NULL);
+			safe_travel(b, enemy_core->pos);
 	}
 	if (breakers) free(breakers);
 }
@@ -464,7 +602,7 @@ static void run_breakers(t_obj *own_core, t_obj *enemy_core, t_obj **enemies)
 
 static void run_macro_spawner(t_obj *own_core, t_obj **enemies)
 {
-	if (!own_core || own_core->s_core.spawn_cooldown != 0) return;
+	if (!own_core || own_core->s_core.spawn_cooldown > 0) return;
 
 	size_t miner_count = core_get_units_byName_count(HARVESTER_NAME);
 	size_t fighter_count = core_get_units_byName_count(INTERCEPTOR_NAME);
@@ -474,38 +612,26 @@ static void run_macro_spawner(t_obj *own_core, t_obj **enemies)
 	size_t res_count = count_obj_array(resources);
 	if (resources) free(resources);
 
-	int enemy_threats_near_core = 0;
-	for (size_t i = 0; enemies && enemies[i] != NULL; i++)
+	/* Count active enemy combat threats */
+	size_t enemy_combat_units = 0;
+	for (size_t e = 0; enemies && enemies[e] != NULL; e++)
 	{
-		if (manhattan_dist(enemies[i]->pos, own_core->pos) <= DEFENSE_PANIC_RADIUS)
-			enemy_threats_near_core++;
+		if (enemies[e]->hp > 0 &&
+			(enemies[e]->s_unit.properties.damage_unit > 0 || enemies[e]->s_unit.properties.damage_core > 0))
+			enemy_combat_units++;
 	}
 
-	/* Urgent Counter: if enemies are approaching our Core and we need more defenders */
-	if (enemy_threats_near_core > (int)fighter_count)
-	{
-		if (own_core->s_core.gems >= INTERCEPTOR_COST)
-			core_action_createUnit(INTERCEPTOR_NAME, "unit_attack", "health", NULL);
-		return;
-	}
-
-	/* Build Order Phase 1: 1st Harvester (fast 35-gem pure miner) */
-	if (res_count > 0 && miner_count < 1)
+	/* 1. STRONG DUAL-HARVESTER ECONOMY OPENING:
+	** Initial 300 gems: build 2 Harvesters immediately to guarantee massive gem flow.
+	*/
+	if (res_count > 0 && miner_count < 2)
 	{
 		if (own_core->s_core.gems >= HARVESTER_COST)
 			core_action_createUnit(HARVESTER_NAME, "mining", NULL);
 		return;
 	}
 
-	/* Build Order Phase 2: 1st Interceptor (Dedicated Core Defender / Goalie) */
-	if (fighter_count < 1)
-	{
-		if (own_core->s_core.gems >= INTERCEPTOR_COST)
-			core_action_createUnit(INTERCEPTOR_NAME, "unit_attack", "health", NULL);
-		return;
-	}
-
-	/* Build Order Phase 3: 2nd Interceptor (Hunter / Forward Screen) */
+	/* 2. BASELINE DEFENSE: Ensure at least 2 Interceptors (Goalie + Vanguard) exist */
 	if (fighter_count < 2)
 	{
 		if (own_core->s_core.gems >= INTERCEPTOR_COST)
@@ -513,25 +639,37 @@ static void run_macro_spawner(t_obj *own_core, t_obj **enemies)
 		return;
 	}
 
-	/* Build Order Phase 4: Siege Breakers */
-	if (breaker_count < 3)
+	/* 3. ENSURE WIN CONDITION: At least 1 Siege Breaker must ALWAYS exist */
+	if (breaker_count < 1)
 	{
 		if (own_core->s_core.gems >= BREAKER_COST)
 			core_action_createUnit(BREAKER_NAME, "core_attack", "health", NULL);
 		return;
 	}
 
-	/* If economy is rich and we have extra gems, add 2nd miner if deposits remain */
-	if (res_count > 0 && miner_count < MAX_MINERS && own_core->s_core.gems >= 100)
+	/* 4. COMBAT DEFENSE / PARITY: If enemy combat units threaten us, match their army! */
+	if (enemy_combat_units >= fighter_count)
 	{
-		core_action_createUnit(HARVESTER_NAME, "mining", NULL);
+		if (own_core->s_core.gems >= INTERCEPTOR_COST)
+			core_action_createUnit(INTERCEPTOR_NAME, "unit_attack", "health", NULL);
 		return;
 	}
 
-	/* Excess gems: spawn additional Breakers */
+	/* 5. 2nd Siege Breaker */
+	if (breaker_count < 2)
+	{
+		if (own_core->s_core.gems >= BREAKER_COST)
+			core_action_createUnit(BREAKER_NAME, "core_attack", "health", NULL);
+		return;
+	}
+
+	/* 6. CONTINUOUS PRODUCTION: More Breakers or Interceptors */
 	if (own_core->s_core.gems >= BREAKER_COST)
 	{
-		core_action_createUnit(BREAKER_NAME, "core_attack", "health", NULL);
+		if (fighter_count <= enemy_combat_units + 1)
+			core_action_createUnit(INTERCEPTOR_NAME, "unit_attack", "health", NULL);
+		else
+			core_action_createUnit(BREAKER_NAME, "core_attack", "health", NULL);
 	}
 }
 
@@ -542,6 +680,8 @@ static void run_macro_spawner(t_obj *own_core, t_obj **enemies)
 void ft_on_tick(unsigned long tick)
 {
 	(void)tick;
+	reset_tick_reservations();
+
 	t_obj *own_core = ft_get_core_own();
 	t_obj *enemy_core = ft_get_core_opponent();
 	t_obj **enemies = core_get_objs_filter(is_enemy_unit);
@@ -563,5 +703,5 @@ void ft_on_tick(unsigned long tick)
 
 int main(int argc, char **argv)
 {
-	return (core_startGame("ULTIMATE_CORE", argc, argv, ft_on_tick, false));
+	return (core_startGame("ex_v01", argc, argv, ft_on_tick, false));
 }
