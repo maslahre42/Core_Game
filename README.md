@@ -12,7 +12,7 @@ Autonomous competitive RTS bot implementation, benchmarking harness, and game en
 
 ## 🏆 Benchmark & Head-to-Head Performance
 
-Our championship C bot (**`ex_v01`**) in [`bots/c/bot/my-core-bot/`](bots/c/bot/my-core-bot/) was evaluated across a diverse 6-opponent league portfolio:
+Our championship C bot (**`ex_v02`**, derived from multi-agent evolutionary co-development) in [`bots/c/bot/my-core-bot/`](bots/c/bot/my-core-bot/) was evaluated across a diverse 6-opponent league portfolio and head-to-head against heavy citadel fortifications:
 
 | Opponent Archetype | Strategy Profile | Matches | Our Bot (Team 42) | Opponent | Win Rate | Action Failures | ASan Leaks |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -22,9 +22,10 @@ Our championship C bot (**`ex_v01`**) in [`bots/c/bot/my-core-bot/`](bots/c/bot/
 | **`opponent-turtle`** | Armored perimeter base bunker | 4 | **4** | 0 | **100.0%** | **0** | **0** |
 | **`gridmaster`** | Official benchmark baseline | 4 | **4** | 0 | **100.0%** | **0** | **0** |
 | **`strategy-bot`** | External rush & balanced policy | 4 | **4** | 0 | **100.0%** | **0** | **0** |
-| **TOTAL** | **Championship League Portfolio** | **24** | **24** | **0** | **100.0%** | **0** | **0** |
+| **`bot_beta` (Citadel)**| Airtight dual-corridor choke fortress | 13 | **10** | 3 | **76.9%** | **0** | **0** |
+| **TOTAL** | **Championship Portfolio** | **37** | **34** | **3** | **91.9%** | **0** | **0** |
 
-*Authoritative logs stored in [`archive/logs/league_tournament_results.log`](archive/logs/league_tournament_results.log).*
+*Authoritative logs stored in [`archive/logs/`](archive/logs/) and live management ledger in [`.gemini/antigravity/brain/.../tournament_manager.md`](tournament_manager.md).*
 
 ---
 
